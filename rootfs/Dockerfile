@@ -43,6 +43,7 @@ RUN buildDeps='gcc libffi-dev libpq-dev libldap2-dev libsasl2-dev python3-dev py
         /lib/udev \
         /usr/lib/x86_64-linux-gnu/gconv/IBM* \
         /usr/lib/x86_64-linux-gnu/gconv/EBC* && \
+        update-alternatives --install /usr/bin/python python /usr/bin/python3 2 && \
     bash -c "mkdir -p /usr/share/man/man{1..8}"
 
 COPY . /app

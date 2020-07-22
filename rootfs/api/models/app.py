@@ -237,7 +237,7 @@ class App(UuidAuditedModel):
                 except KubeException:
                     self.log("creating Ingress {}".format(namespace), level=logging.INFO)
 
-                    ingress_annotations = None
+                    ingress_annotations = {}
 
                     if settings.INGRESS_DEFAULT_ANNOTATIONS != '':
                         ingress_annotations = json.loads(settings.INGRESS_DEFAULT_ANNOTATIONS)
