@@ -13,8 +13,10 @@ class Deployment(Resource):
 
     @property
     def api_version(self):
+        # API locations have changed since 1.9 and deprecated in 1.16
+        # https://kubernetes.io/blog/2019/07/18/api-deprecations-in-1-16/
         if self.version() >= parse("1.9.0"):
-            return 'extensions/v1beta1'
+            return 'apps/v1'
 
         return 'extensions/v1beta1'
 
@@ -119,6 +121,8 @@ class Deployment(Resource):
         return manifest
 
     def create(self, namespace, name, image, entrypoint, command, spec_annotations, **kwargs):
+        # Ingress API will be deprecated in 1.20 to use networking.k8s.io/v1beta1
+        # https://kubernetes.io/blog/2019/07/18/api-deprecations-in-1-16/
         manifest = self.manifest(namespace, name, image,
                                  entrypoint, command, spec_annotations, **kwargs)
 
