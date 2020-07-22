@@ -3,6 +3,7 @@ from scheduler.resources import Resource
 
 from packaging.version import parse
 
+
 class ReplicaSet(Resource):
     api_prefix = 'apis'
     short_name = 'rs'

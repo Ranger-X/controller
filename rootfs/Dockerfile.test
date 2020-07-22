@@ -53,6 +53,7 @@ ENV PGBIN=/usr/lib/postgresql/10/bin PGDATA=/var/lib/postgresql/data
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         git \
+        sudo \
         postgresql \
         postgresql-contrib \
         python3-pip \

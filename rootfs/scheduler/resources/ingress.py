@@ -52,7 +52,10 @@ class Ingress(Resource):
         }
 
         # enable auto-TLS through nginx ingress controller
-        if 'kubernetes.io/tls-acme' in annotations and annotations['kubernetes.io/tls-acme'] == "true":
+        if (
+            'kubernetes.io/tls-acme' in annotations and
+            annotations['kubernetes.io/tls-acme'] == "true"
+        ):
             data['spec']['tls'] = [
                 {"hosts": [ingress + "." + hostname], "secretName": ingress + "-tls"}
             ]

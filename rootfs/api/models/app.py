@@ -239,8 +239,8 @@ class App(UuidAuditedModel):
 
                     ingress_annotations = None
 
-                    if settings.KUBERNETES_INGRESS_DEFAULT_ANNOTATIONS != '':
-                        ingress_annotations = json.loads(settings.KUBERNETES_INGRESS_DEFAULT_ANNOTATIONS)
+                    if settings.INGRESS_DEFAULT_ANNOTATIONS != '':
+                        ingress_annotations = json.loads(settings.INGRESS_DEFAULT_ANNOTATIONS)
                         self.log('ingress with annotations {}'.format(ingress_annotations),
                                  level=logging.DEBUG)
 
