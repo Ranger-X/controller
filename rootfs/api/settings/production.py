@@ -332,6 +332,9 @@ KUBERNETES_POD_TERMINATION_GRACE_PERIOD_SECONDS = int(os.environ.get('KUBERNETES
 # Default quota spec for application namespace
 KUBERNETES_NAMESPACE_DEFAULT_QUOTA_SPEC = os.environ.get('KUBERNETES_NAMESPACE_DEFAULT_QUOTA_SPEC', '')  # noqa
 
+# Default ingress annotations for applications
+KUBERNETES_INGRESS_DEFAULT_ANNOTATIONS = os.environ.get('KUBERNETES_INGRESS_DEFAULT_ANNOTATIONS', '')  # noqa
+
 # registry settings
 REGISTRY_HOST = os.environ.get('DEIS_REGISTRY_SERVICE_HOST', '127.0.0.1')
 REGISTRY_PORT = os.environ.get('DEIS_REGISTRY_SERVICE_PORT', 5000)

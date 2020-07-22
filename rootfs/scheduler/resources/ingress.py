@@ -22,14 +22,17 @@ class Ingress(Resource):
 
         return response
 
-    def create(self, ingress, namespace, hostname):
+    def create(self, ingress, namespace, hostname, **kwargs):
         url = "/apis/extensions/v1beta1/namespaces/%s/ingresses" % namespace
+
+        annotations = kwargs.get('annotations', {})
 
         data = {
             "kind": "Ingress",
             "apiVersion": "extensions/v1beta1",
             "metadata": {
-                "name": ingress
+                "name": ingress,
+                "annotations": annotations
             },
             "spec": {
                 "rules": [
@@ -47,6 +50,13 @@ class Ingress(Resource):
                 ]
             }
         }
+
+        # enable auto-TLS through nginx ingress controller
+        if 'kubernetes.io/tls-acme' in annotations and annotations['kubernetes.io/tls-acme'] == "true":
+            data['spec']['tls'] = [
+                {"hosts": [ingress + "." + hostname], "secretName": ingress + "-tls"}
+            ]
+
         response = self.http_post(url, json=data)
 
         if not response.status_code == 201:

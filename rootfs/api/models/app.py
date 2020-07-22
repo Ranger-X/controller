@@ -236,9 +236,18 @@ class App(UuidAuditedModel):
                     self._scheduler.ingress.get(ingress)
                 except KubeException:
                     self.log("creating Ingress {}".format(namespace), level=logging.INFO)
+
+                    ingress_annotations = None
+
+                    if settings.KUBERNETES_INGRESS_DEFAULT_ANNOTATIONS != '':
+                        ingress_annotations = json.loads(settings.KUBERNETES_INGRESS_DEFAULT_ANNOTATIONS)
+                        self.log('ingress with annotations {}'.format(ingress_annotations),
+                                 level=logging.DEBUG)
+
                     self._scheduler.ingress.create(ingress,
                                                    namespace,
-                                                   settings.EXPERIMENTAL_NATIVE_INGRESS_HOSTNAME)
+                                                   settings.EXPERIMENTAL_NATIVE_INGRESS_HOSTNAME,
+                                                   annotations=ingress_annotations)
         except KubeException as e:
             raise ServiceUnavailable('Could not create Ingress in Kubernetes') from e
         try:

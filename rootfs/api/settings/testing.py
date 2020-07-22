@@ -39,5 +39,6 @@ CACHES = {
 # How long k8s waits for a pod to finish work after a SIGTERM before sending SIGKILL
 KUBERNETES_POD_TERMINATION_GRACE_PERIOD_SECONDS = int(os.environ.get('KUBERNETES_POD_TERMINATION_GRACE_PERIOD_SECONDS', 2))  # noqa
 KUBERNETES_NAMESPACE_DEFAULT_QUOTA_SPEC = '{"spec":{"hard":{"pods":"10"}}}'
+KUBERNETES_INGRESS_DEFAULT_ANNOTATIONS = '{"kubernetes.io/ingress.class": "nginx", "kubernetes.io/tls-acme": "true"}'
 
 DEIS_DEFAULT_CONFIG_TAGS = os.environ.get('DEIS_DEFAULT_CONFIG_TAGS', '')
